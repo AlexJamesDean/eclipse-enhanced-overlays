@@ -8,6 +8,7 @@ version '1.3.0'
 
 ui_page 'html/index.html'
 
+shared_script '@ajd-lib/theme/city.lua'
 shared_scripts {
     'sh_config.lua', -- Shared config
     '@qb-core/shared/locale.lua',
@@ -36,3 +37,4 @@ files {
 }
 
 dependency 'PolyZone'
+dependency 'ajd-lib'

@@ -1,19 +1,18 @@
+@import url('https://cfx-nui-ajd-lib/theme/theme.css');
 /* Aurora theme — shared gold & black UI system (matches ajd-hud / ajd-phone / ajd-housing). */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap");
-
 :root {
-    --gold: #c9a962;
-    --gold-light: #e8d5a3;
-    --gold-dark: #8b7355;
-    --gold-muted: rgba(201, 169, 98, 0.3);
-    --border-gold: rgba(201, 169, 98, 0.15);
-    --text-primary: #f0ebe3;
-    --text-secondary: #8a8279;
+    --gold: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 1);
+    --gold-light: hsla(calc(var(--t-accent-h) + 2.12), calc(var(--t-accent-s) * 1.22913), calc(var(--t-accent-l) + 18.82%), 1);
+    --gold-dark: hsla(calc(var(--t-accent-h) - 8.03), calc(var(--t-accent-s) * 0.49385), calc(var(--t-accent-l) - 14.71%), 1);
+    --gold-muted: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.3);
+    --border-gold: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.15);
+    --text-primary: hsla(var(--t-ink-h), calc(30.23% * var(--t-ink-sat) + var(--t-ink-tint)), calc(91.57% + var(--t-ink-lift)), 1);
+    --text-secondary: hsla(var(--t-ink-h), calc(6.77% * var(--t-ink-sat) + var(--t-ink-tint)), calc(50.78% + var(--t-ink-lift)), 1);
 }
 
 html {
     overflow: hidden;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--t-font-body);
 }
 
 body {
@@ -36,7 +35,7 @@ body {
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--t-font-body);
 }
 
 .progress-labels {
@@ -68,11 +67,11 @@ body {
 }
 
 .progress-bar-container {
-    background: rgba(10, 10, 10, 0.72);
+    background: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.9), calc(3.92% + var(--t-surface-lift)), 0.72);
     height: 0.5vh;
     position: relative;
     display: block;
-    border-radius: 1px;
+    border-radius: calc(1px * var(--t-radius));
     border: 1px solid var(--border-gold);
     overflow: hidden;
 }
@@ -81,8 +80,8 @@ body {
     background: linear-gradient(90deg, var(--gold-dark), var(--gold) 55%, var(--gold-light));
     width: 0%;
     height: 100%;
-    border-radius: 1px;
+    border-radius: calc(1px * var(--t-radius));
     transition: width 0.3s;
     transition-timing-function: ease-out;
-    box-shadow: 0 0 8px rgba(201, 169, 98, 0.55);
+    box-shadow: 0 0 8px hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.55);
 }

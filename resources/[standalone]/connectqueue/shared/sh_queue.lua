@@ -502,7 +502,7 @@ local function showWelcomeCard(deferrals)
             },
             {
                 type = "Action.Submit",
-                title = cfg.ContinueLabel or "Continue to Eclipse City",
+                title = cfg.ContinueLabel or ("Continue to " .. AJD_CITY.name),
                 data = { action = "continue" },
             },
         },

@@ -6,6 +6,8 @@
      vue.js / reset.css on disk are the SUPERSEDED stock UI, no longer loaded. -->
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://cfx-nui-ajd-lib/theme/theme.css">
+    <script src="https://cfx-nui-ajd-lib/theme/theme.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="fonts.css">
@@ -20,7 +22,7 @@
         <div id="titlecard">
             <div class="corner tl"></div>
             <div class="corner br"></div>
-            <div id="titlecard-name">ECLIPSE CITY</div>
+            <div data-city id="titlecard-name">{CITY}</div>
             <div id="titlecard-sub">Where would you like to start?</div>
         </div>
 

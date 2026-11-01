@@ -51,8 +51,8 @@ Config.WelcomeCard = {
     -- Caps vs sentence case is the ONLY way to rank these two buttons: an
     -- Adaptive Card action has no weight or colour, and Action.style needs 1.2.
     DiscordLabel = "JOIN DISCORD - CLAIM WELCOME PACK",
-    ContinueLabel = "Continue to Eclipse City",
-    Title = "WELCOME TO ECLIPSE CITY",
+    ContinueLabel = ("Continue to " .. AJD_CITY.name),
+    Title = ("WELCOME TO " .. AJD_CITY.name:upper()),
     Subtitle = "Open city. No whitelist.",
     Message = "Join our Discord, run /link there for a code, then type that code into /discord in game to claim your welcome pack:",
     Benefits = {

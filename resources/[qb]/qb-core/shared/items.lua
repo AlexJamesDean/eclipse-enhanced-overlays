@@ -352,8 +352,8 @@ QBCore.Shared.Items = {
     goldchain                    = { name = 'goldchain', label = 'Golden Chain', weight = 25, type = 'item', image = 'goldchain.png', unique = false, useable = false, shouldClose = true, description = 'A golden chain seems like the jackpot to me!' },
     tenkgoldchain                = { name = 'tenkgoldchain', label = '10k Gold Chain', weight = 25, type = 'item', image = '10kgoldchain.png', unique = false, useable = false, shouldClose = true, description = '10 carat golden chain' },
     goldbar                      = { name = 'goldbar', label = 'Gold Bar', weight = 100, type = 'item', image = 'goldbar.png', unique = false, useable = false, shouldClose = true, description = 'Looks pretty expensive to me' },
-    golden_ticket                = { name = 'golden_ticket', label = 'Golden Ticket', weight = 0, type = 'item', image = 'golden_ticket.png', unique = true, useable = false, shouldClose = true, description = 'A uniquely numbered Eclipse City prize, redeemable at the end-of-October wipe.' },
-    house_voucher                = { name = 'house_voucher', label = 'Event House Voucher', weight = 0, type = 'item', image = 'certificate.png', unique = true, useable = false, shouldClose = true, description = 'A uniquely numbered voucher for an Eclipse City event-prize house.' },
+    golden_ticket                = { name = 'golden_ticket', label = 'Golden Ticket', weight = 0, type = 'item', image = 'golden_ticket.png', unique = true, useable = false, shouldClose = true, description = ('A uniquely numbered ' .. AJD_CITY.name .. ' prize, redeemable at the end-of-October wipe.') },
+    house_voucher                = { name = 'house_voucher', label = 'Event House Voucher', weight = 0, type = 'item', image = 'certificate.png', unique = true, useable = false, shouldClose = true, description = ('A uniquely numbered voucher for an ' .. AJD_CITY.name .. ' event-prize house.') },
 
     -- Cops Tools
     armor                        = { name = 'armor', label = 'Armor', weight = 500, type = 'item', image = 'armor.png', unique = false, useable = true, shouldClose = true, description = 'Some protection won\'t hurt... right?' },

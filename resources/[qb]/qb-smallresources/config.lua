@@ -1,7 +1,7 @@
 Config = {}
 QBCore = exports['qb-core']:GetCoreObject()
 Config.UseTarget = GetConvar('UseTarget', 'false') == 'true' -- Use qb-target interactions (don't change this, go to your server.cfg and add `setr UseTarget true` to use this and just that from true to false or the other way around)
-Config.PauseMapText = 'Eclipse City'                                     -- Text shown above the map when ESC is pressed. If left empty 'FiveM' will appear
+Config.PauseMapText = AJD_CITY.name                                     -- Text shown above the map when ESC is pressed. If left empty 'FiveM' will appear
 Config.HarnessUses = 20
 Config.DamageNeeded = 100.0                                  -- amount of damage till you can push your vehicle. 0-1000
 -- 26 Jul 2026: briefly set to 'none' because all 38 webhooks in server/logs.lua were

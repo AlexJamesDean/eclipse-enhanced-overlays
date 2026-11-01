@@ -510,7 +510,7 @@ return {
 		weight = 0,
 		stack = false,
 		close = true,
-		description = "A uniquely numbered Eclipse City prize, redeemable at the end-of-October wipe.",
+		description = ("A uniquely numbered " .. AJD_CITY.name .. " prize, redeemable at the end-of-October wipe."),
 		client = { image = "golden_ticket.png" },
 	},
 	["house_voucher"] = {
@@ -518,7 +518,7 @@ return {
 		weight = 0,
 		stack = false,
 		close = true,
-		description = "A uniquely numbered voucher for an Eclipse City event-prize house.",
+		description = ("A uniquely numbered voucher for an " .. AJD_CITY.name .. " event-prize house."),
 		client = { image = "certificate.png" },
 	},
 	["goldchain"] = {

@@ -32,3 +32,4 @@ files {
     'html/js/main.js',
     'html/js/RadialMenu.js',
 }
+dependency 'ajd-lib'

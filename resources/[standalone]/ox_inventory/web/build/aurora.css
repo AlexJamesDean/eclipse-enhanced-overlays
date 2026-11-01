@@ -21,23 +21,21 @@
    Tokens are copied verbatim from ajd-hud/html/style.css :root — the canonical set.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap');
-
 :root {
-    --gold: #c9a962;
-    --gold-light: #e8d5a3;
-    --gold-dark: #8b7355;
-    --gold-muted: rgba(201, 169, 98, 0.3);
-    --surface: #0a0a0a;
-    --surface-elevated: #111111;
-    --surface-card: rgba(22, 22, 22, 0.9);
-    --text-primary: #f0ebe3;
-    --text-secondary: #8a8279;
-    --text-muted: #5a544d;
-    --border-subtle: rgba(255, 255, 255, 0.05);
-    --border-gold: rgba(201, 169, 98, 0.15);
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'Montserrat', sans-serif;
+    --gold: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 1);
+    --gold-light: hsla(calc(var(--t-accent-h) + 2.12), calc(var(--t-accent-s) * 1.22913), calc(var(--t-accent-l) + 18.82%), 1);
+    --gold-dark: hsla(calc(var(--t-accent-h) - 8.03), calc(var(--t-accent-s) * 0.49385), calc(var(--t-accent-l) - 14.71%), 1);
+    --gold-muted: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.3);
+    --surface: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.9), calc(3.92% + var(--t-surface-lift)), 1);
+    --surface-elevated: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.83), calc(6.67% + var(--t-surface-lift)), 1);
+    --surface-card: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.78), calc(8.63% + var(--t-surface-lift)), 0.9);
+    --text-primary: hsla(var(--t-ink-h), calc(30.23% * var(--t-ink-sat) + var(--t-ink-tint)), calc(91.57% + var(--t-ink-lift)), 1);
+    --text-secondary: hsla(var(--t-ink-h), calc(6.77% * var(--t-ink-sat) + var(--t-ink-tint)), calc(50.78% + var(--t-ink-lift)), 1);
+    --text-muted: hsla(var(--t-surface-h), calc(7.78% * var(--t-surface-sat) + var(--t-surface-tint) * 0.18), calc(32.75% + var(--t-surface-lift)), 1);
+    --border-subtle: hsla(var(--t-ink-h), calc(0% * var(--t-ink-sat) + var(--t-ink-tint)), calc(100% + var(--t-ink-lift)), 0.05);
+    --border-gold: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.15);
+    --font-display: var(--t-font-display);
+    --font-body: var(--t-font-body);
 }
 
 /* ── typography ─────────────────────────────────────────────────────────────
@@ -86,20 +84,20 @@ body,
 .inventory-slot:hover {
     border-color: var(--gold);
     background-color: var(--surface-elevated);
-    box-shadow: 0 0 10px rgba(201, 169, 98, 0.18);
+    box-shadow: 0 0 10px hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.18);
 }
 
 /* the slot being dragged */
 .inv-dragging,
 .item-drag-preview {
     border: 1px solid var(--gold) !important;
-    box-shadow: 0 0 14px rgba(201, 169, 98, 0.35) !important;
+    box-shadow: 0 0 14px hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.35) !important;
 }
 
 /* label strip along the bottom of each slot */
 .inventory-slot-label-box {
     color: var(--text-primary);
-    background-color: rgba(10, 10, 10, 0.92);
+    background-color: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.9), calc(3.92% + var(--t-surface-lift)), 0.92);
     border-top: 1px solid var(--border-gold);
     border-radius: 0;
 }
@@ -115,7 +113,7 @@ body,
 
 .inventory-slot-number {
     color: var(--gold-dark);
-    background: rgba(10, 10, 10, 0.85);
+    background: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.9), calc(3.92% + var(--t-surface-lift)), 0.85);
     border-right: 1px solid var(--border-gold);
     font-weight: 500;
 }
@@ -126,16 +124,16 @@ body,
 .item-slot-currency-wrapper p,
 .item-slot-price-wrapper p {
     color: var(--gold-light);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+    text-shadow: 0 1px 3px rgba(var(--t-shade-rgb), 0.9);
 }
 
 /* ── the grid panels, with the gold L-corner motif ──────────────────────── */
 .inventory-grid-wrapper {
     position: relative;
-    background: rgba(10, 10, 10, 0.72);
+    background: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.9), calc(3.92% + var(--t-surface-lift)), 0.72);
     border: 1px solid var(--border-subtle);
     padding: 12px;
-    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 18px 50px rgba(var(--t-shade-rgb), 0.55);
 }
 
 .inventory-grid-wrapper::before,
@@ -168,18 +166,18 @@ body,
    The FILL is an inline-styled child element written by React, so the fill rules
    need !important. The tracks are plain classes and do not. */
 .weight-bar {
-    background: rgba(255, 255, 255, 0.04);
+    background: hsla(var(--t-ink-h), calc(0% * var(--t-ink-sat) + var(--t-ink-tint)), calc(100% + var(--t-ink-lift)), 0.04);
     border: 1px solid var(--border-subtle);
     border-radius: 0;
     height: 1vh;
 }
 .weight-bar > div {
     background: linear-gradient(90deg, var(--gold-dark), var(--gold)) !important;
-    box-shadow: 0 0 8px rgba(201, 169, 98, 0.35);
+    box-shadow: 0 0 8px hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.35);
 }
 
 .durability-bar {
-    background: rgba(255, 255, 255, 0.05);
+    background: hsla(var(--t-ink-h), calc(0% * var(--t-ink-sat) + var(--t-ink-tint)), calc(100% + var(--t-ink-lift)), 0.05);
     height: 3px;
 }
 .durability-bar > div {
@@ -189,10 +187,10 @@ body,
 /* ── tooltips ───────────────────────────────────────────────────────────── */
 .tooltip-wrapper {
     color: var(--text-secondary);
-    background-color: rgba(12, 12, 12, 0.96);
+    background-color: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.88), calc(4.71% + var(--t-surface-lift)), 0.96);
     border: 1px solid var(--border-gold);
     border-radius: 0;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 8px 24px rgba(var(--t-shade-rgb), 0.6);
     padding: 10px 12px;
 }
 
@@ -223,10 +221,10 @@ body,
 /* ── context menu (right-click) ─────────────────────────────────────────── */
 .context-menu-list {
     color: var(--text-primary);
-    background-color: rgba(12, 12, 12, 0.97);
+    background-color: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.88), calc(4.71% + var(--t-surface-lift)), 0.97);
     border: 1px solid var(--border-gold);
     border-radius: 0;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 10px 30px rgba(var(--t-shade-rgb), 0.6);
     padding: 4px;
 }
 
@@ -243,7 +241,7 @@ body,
 .context-menu-item:hover,
 .context-menu-item:focus {
     color: var(--gold-light);
-    background-color: rgba(201, 169, 98, 0.12);
+    background-color: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.12);
 }
 
 /* ── controls (give / drop / use, and the search field) ─────────────────── */
@@ -254,7 +252,7 @@ body,
 
 .inventory-control-button {
     color: var(--gold);
-    background: rgba(201, 169, 98, 0.08);
+    background: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.08);
     border: 1px solid var(--border-gold);
     border-radius: 0;
     font-family: var(--font-body);
@@ -266,9 +264,9 @@ body,
 }
 .inventory-control-button:hover {
     color: var(--gold-light);
-    background: rgba(201, 169, 98, 0.2);
+    background: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.2);
     border-color: var(--gold);
-    box-shadow: 0 0 10px rgba(201, 169, 98, 0.25);
+    box-shadow: 0 0 10px hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.25);
 }
 
 .inventory-control-input {
@@ -294,7 +292,7 @@ body,
 .hotbar-slot-header-wrapper,
 .item-hotslot-header-wrapper {
     color: var(--gold-dark);
-    background: rgba(10, 10, 10, 0.85);
+    background: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.9), calc(3.92% + var(--t-surface-lift)), 0.85);
     border-bottom: 1px solid var(--border-gold);
     font-weight: 500;
     letter-spacing: 0.5px;
@@ -306,7 +304,7 @@ body,
 }
 .item-notification-action-box {
     color: var(--gold);
-    background-color: rgba(10, 10, 10, 0.95);
+    background-color: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.9), calc(3.92% + var(--t-surface-lift)), 0.95);
     border: 1px solid var(--border-gold);
     border-bottom: 0;
     border-radius: 0;
@@ -319,14 +317,14 @@ body,
 
 /* ── "useful controls" help dialog (F1) ────────────────────────────────── */
 .useful-controls-dialog-overlay {
-    background: rgba(0, 0, 0, 0.66);
+    background: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint)), calc(0% + var(--t-surface-lift)), 0.66);
 }
 .useful-controls-dialog {
     color: var(--text-secondary);
     background-color: var(--surface);
     border: 1px solid var(--border-gold);
     border-radius: 0;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 24px 60px rgba(var(--t-shade-rgb), 0.7);
 }
 .useful-controls-dialog-title {
     color: var(--gold);

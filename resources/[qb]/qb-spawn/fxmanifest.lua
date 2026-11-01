@@ -32,3 +32,4 @@ files {
     'html/fonts/CormorantGaramond.woff2',
     'html/fonts/Montserrat.woff2',
 }
+dependency 'ajd-lib'

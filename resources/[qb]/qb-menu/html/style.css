@@ -1,22 +1,21 @@
+@import url('https://cfx-nui-ajd-lib/theme/theme.css');
 /* Aurora Theme - Context Menus */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@200;300;400;500;600&display=swap');
-
 :root {
-    --gold: #c9a962;
-    --gold-light: #e8d5a3;
-    --gold-dark: #8b7355;
-    --gold-muted: rgba(201, 169, 98, 0.3);
-    --surface: #0a0a0a;
-    --surface-elevated: #111111;
-    --surface-card: rgba(22, 22, 22, 0.95);
-    --surface-hover: rgba(28, 28, 28, 0.95);
-    --text-primary: #f0ebe3;
-    --text-secondary: #8a8279;
-    --text-muted: #5a544d;
-    --border-subtle: rgba(255, 255, 255, 0.05);
-    --border-gold: rgba(201, 169, 98, 0.15);
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'Montserrat', sans-serif;
+    --gold: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 1);
+    --gold-light: hsla(calc(var(--t-accent-h) + 2.12), calc(var(--t-accent-s) * 1.22913), calc(var(--t-accent-l) + 18.82%), 1);
+    --gold-dark: hsla(calc(var(--t-accent-h) - 8.03), calc(var(--t-accent-s) * 0.49385), calc(var(--t-accent-l) - 14.71%), 1);
+    --gold-muted: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.3);
+    --surface: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.9), calc(3.92% + var(--t-surface-lift)), 1);
+    --surface-elevated: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.83), calc(6.67% + var(--t-surface-lift)), 1);
+    --surface-card: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.78), calc(8.63% + var(--t-surface-lift)), 0.95);
+    --surface-hover: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.73), calc(10.98% + var(--t-surface-lift)), 0.95);
+    --text-primary: hsla(var(--t-ink-h), calc(30.23% * var(--t-ink-sat) + var(--t-ink-tint)), calc(91.57% + var(--t-ink-lift)), 1);
+    --text-secondary: hsla(var(--t-ink-h), calc(6.77% * var(--t-ink-sat) + var(--t-ink-tint)), calc(50.78% + var(--t-ink-lift)), 1);
+    --text-muted: hsla(var(--t-surface-h), calc(7.78% * var(--t-surface-sat) + var(--t-surface-tint) * 0.18), calc(32.75% + var(--t-surface-lift)), 1);
+    --border-subtle: hsla(var(--t-ink-h), calc(0% * var(--t-ink-sat) + var(--t-ink-tint)), calc(100% + var(--t-ink-lift)), 0.05);
+    --border-gold: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.15);
+    --font-display: var(--t-font-display);
+    --font-body: var(--t-font-body);
 }
 
 * { padding: 0; margin: 0; font-family: var(--font-body); font-weight: 400; }
@@ -100,7 +99,7 @@ html, body { background: transparent !important; }
     font-size: 14px;
 }
 
-.disabled { background: rgba(10, 10, 10, 0.7) !important; color: var(--text-muted); cursor: default; }
+.disabled { background: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.9), calc(3.92% + var(--t-surface-lift)), 0.7) !important; color: var(--text-muted); cursor: default; }
 .disabled:hover { border-color: var(--border-subtle); color: var(--text-muted); }
 .disabled:hover::before { display: none; }
 

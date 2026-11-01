@@ -2,20 +2,20 @@
    Layout mirrors ajd-multicharacter's select scene (letterbox + titlecard +
    bottom console) so loading -> character select -> spawn reads as one flow. */
 :root {
-    --gold: #c9a962;
-    --gold-light: #e8d5a3;
-    --gold-dark: #8b7355;
-    --gold-muted: rgba(201, 169, 98, 0.3);
-    --surface: #0a0a0a;
-    --surface-elevated: #111111;
-    --surface-card: rgba(22, 22, 22, 0.9);
-    --text-primary: #f0ebe3;
-    --text-secondary: #8a8279;
-    --text-muted: #5a544d;
-    --border-subtle: rgba(255, 255, 255, 0.05);
-    --border-gold: rgba(201, 169, 98, 0.15);
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'Montserrat', sans-serif;
+    --gold: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 1);
+    --gold-light: hsla(calc(var(--t-accent-h) + 2.12), calc(var(--t-accent-s) * 1.22913), calc(var(--t-accent-l) + 18.82%), 1);
+    --gold-dark: hsla(calc(var(--t-accent-h) - 8.03), calc(var(--t-accent-s) * 0.49385), calc(var(--t-accent-l) - 14.71%), 1);
+    --gold-muted: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.3);
+    --surface: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.9), calc(3.92% + var(--t-surface-lift)), 1);
+    --surface-elevated: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.83), calc(6.67% + var(--t-surface-lift)), 1);
+    --surface-card: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.78), calc(8.63% + var(--t-surface-lift)), 0.9);
+    --text-primary: hsla(var(--t-ink-h), calc(30.23% * var(--t-ink-sat) + var(--t-ink-tint)), calc(91.57% + var(--t-ink-lift)), 1);
+    --text-secondary: hsla(var(--t-ink-h), calc(6.77% * var(--t-ink-sat) + var(--t-ink-tint)), calc(50.78% + var(--t-ink-lift)), 1);
+    --text-muted: hsla(var(--t-surface-h), calc(7.78% * var(--t-surface-sat) + var(--t-surface-tint) * 0.18), calc(32.75% + var(--t-surface-lift)), 1);
+    --border-subtle: hsla(var(--t-ink-h), calc(0% * var(--t-ink-sat) + var(--t-ink-tint)), calc(100% + var(--t-ink-lift)), 0.05);
+    --border-gold: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.15);
+    --font-display: var(--t-font-display);
+    --font-body: var(--t-font-body);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -96,7 +96,7 @@ body {
     letter-spacing: 0.35em;
     text-indent: 0.35em;
     color: var(--text-primary);
-    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 2px 24px rgba(var(--t-shade-rgb), 0.8);
 }
 
 #titlecard-sub {
@@ -147,7 +147,7 @@ body {
 
 .card.selected {
     border-color: var(--gold-dark);
-    box-shadow: 0 0 18px rgba(201, 169, 98, 0.15);
+    box-shadow: 0 0 18px hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.15);
 }
 
 .card.selected .corner { opacity: 0.8; }
@@ -197,9 +197,9 @@ body {
 }
 
 .btn.gold:not(:disabled):hover {
-    background: rgba(201, 169, 98, 0.12);
+    background: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.12);
     color: var(--gold-light);
-    box-shadow: 0 0 16px rgba(201, 169, 98, 0.2);
+    box-shadow: 0 0 16px hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 0.2);
 }
 
 .btn:disabled { opacity: 0.35; cursor: default; }

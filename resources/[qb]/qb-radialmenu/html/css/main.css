@@ -1,14 +1,13 @@
+@import url('https://cfx-nui-ajd-lib/theme/theme.css');
 /* Aurora Theme - Radial Menu */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@200;300;400;500;600&display=swap');
-
 :root {
-    --gold: #c9a962;
-    --gold-light: #e8d5a3;
-    --gold-dark: #8b7355;
-    --surface: #0a0a0a;
-    --text-primary: #f0ebe3;
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'Montserrat', sans-serif;
+    --gold: hsla(var(--t-accent-h), var(--t-accent-s), var(--t-accent-l), 1);
+    --gold-light: hsla(calc(var(--t-accent-h) + 2.12), calc(var(--t-accent-s) * 1.22913), calc(var(--t-accent-l) + 18.82%), 1);
+    --gold-dark: hsla(calc(var(--t-accent-h) - 8.03), calc(var(--t-accent-s) * 0.49385), calc(var(--t-accent-l) - 14.71%), 1);
+    --surface: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.9), calc(3.92% + var(--t-surface-lift)), 1);
+    --text-primary: hsla(var(--t-ink-h), calc(30.23% * var(--t-ink-sat) + var(--t-ink-tint)), calc(91.57% + var(--t-ink-lift)), 1);
+    --font-display: var(--t-font-display);
+    --font-body: var(--t-font-body);
     --menu-sector-font-size: 2.8px;
     --menu-center-font-size: 2.5px;
 }
@@ -31,7 +30,7 @@ svg.menu { position: absolute; overflow: visible; transition: 0.1s; transition-t
 svg.menu.inner { transform: scale(0.66) rotate(-10deg); opacity: 0; visibility: hidden; }
 svg.menu.outer { opacity: 0; visibility: hidden; }
 
-svg.menu > g > path { fill: rgba(22, 22, 22, 0.92); }
+svg.menu > g > path { fill: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.78), calc(8.63% + var(--t-surface-lift)), 0.92); }
 
 svg.menu > g.sector > path { cursor: pointer; }
 
@@ -46,11 +45,11 @@ svg.menu > g.sector > use {
     fill: var(--text-primary);
 }
 
-svg.menu > g.sector:hover > path { fill: rgba(28, 28, 28, 0.95); stroke: var(--gold); }
+svg.menu > g.sector:hover > path { fill: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.73), calc(10.98% + var(--t-surface-lift)), 0.95); stroke: var(--gold); }
 
-svg.menu > g.center:hover > circle { fill: rgba(28, 28, 28, 0.95); stroke: var(--gold); }
+svg.menu > g.center:hover > circle { fill: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.73), calc(10.98% + var(--t-surface-lift)), 0.95); stroke: var(--gold); }
 
-svg.menu > g.center > circle { cursor: pointer; fill: rgba(22, 22, 22, 0.92); }
+svg.menu > g.center > circle { cursor: pointer; fill: hsla(var(--t-surface-h), calc(0% * var(--t-surface-sat) + var(--t-surface-tint) * 0.78), calc(8.63% + var(--t-surface-lift)), 0.92); }
 
 svg.menu > g.center > text,
 svg.menu > g.center > use {

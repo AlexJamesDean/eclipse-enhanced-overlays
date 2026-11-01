@@ -15,6 +15,7 @@ dependencies {
     'ox_lib',
 }
 
+shared_script '@ajd-lib/theme/city.lua'
 shared_script '@ox_lib/init.lua'
 
 ox_libs {
@@ -49,3 +50,4 @@ files {
     'modules/bridge/**/client.lua',
     'data/*.lua',
 }
+dependency 'ajd-lib'

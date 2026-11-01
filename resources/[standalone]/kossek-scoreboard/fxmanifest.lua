@@ -1,0 +1,28 @@
+fx_version 'cerulean'
+game 'gta5'
+author 'k0sseK'
+
+ui_page 'html/index.html'
+
+files {
+    'html/index.html',
+    'html/style.css',
+    'html/main.js',
+    'html/assets/*.png',
+    'html/assets/*.jpg'
+}
+
+shared_script '@ajd-lib/theme/city.lua'
+client_scripts {
+    'config.lua',
+    'client/main.lua'
+}
+
+server_scripts {
+    'config.lua',
+    'bridge/**/server.lua',
+    'server/main.lua'
+}
+
+lua54 'yes'
+dependency 'ajd-lib'

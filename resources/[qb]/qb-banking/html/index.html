@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    <link rel="stylesheet" href="https://cfx-nui-ajd-lib/theme/theme.css">
+    <script src="https://cfx-nui-ajd-lib/theme/theme.js"></script>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>qb-banking</title>
         <link rel="stylesheet" href="style.css" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@200;300;400;500;600&display=swap" />
         <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
     </head>
@@ -19,7 +20,7 @@
                 <div class="bank-window">
                     <div class="window-header">
                         <div class="brand">
-                            <div class="brand-title">Eclipse City Bank</div>
+                            <div data-city class="brand-title">{city} Bank</div>
                             <div class="brand-sub">Private &amp; Business Banking</div>
                         </div>
                         <div class="header-player">
@@ -243,7 +244,7 @@
                 <div class="atm-window">
                     <div class="atm-header">
                         <div class="brand-title">ATM</div>
-                        <div class="brand-sub">Eclipse City Bank</div>
+                        <div data-city class="brand-sub">{city} Bank</div>
                     </div>
                     <div class="atm-body">
                         <label for="atmAccount">Account</label>
@@ -285,7 +286,7 @@
             <div class="overlay" v-show="showPinPrompt">
                 <div class="pin-window" :class="{ shake: pinError }">
                     <div class="brand-title">Enter PIN</div>
-                    <div class="brand-sub">Eclipse City Bank</div>
+                    <div data-city class="brand-sub">{city} Bank</div>
                     <div class="pin-display" :class="{ error: pinError }">
                         <span v-if="pinError">Incorrect PIN</span>
                         <span v-else-if="!enteredPin.length" class="pin-placeholder">····</span>

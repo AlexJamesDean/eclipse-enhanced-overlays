@@ -37,3 +37,4 @@ files {
 	'html/style.css',
 	'html/app.js'
 }
+dependency 'ajd-lib'

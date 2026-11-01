@@ -33,3 +33,4 @@ files {
     'html/script.js',
     'html/style.css',
 }
+dependency 'ajd-lib'
