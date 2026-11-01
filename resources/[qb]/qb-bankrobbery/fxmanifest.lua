@@ -3,7 +3,7 @@ game 'gta5'
 lua54 'yes'
 use_fxv2_oal 'yes'
 author 'Kakarot'
-description 'Eclipse City bank jobs — branch vaults, grid attacks and major-bank heists'
+description 'Bank jobs — branch vaults, grid attacks and major-bank heists'
 version '1.3.0'
 
 ui_page 'html/index.html'

@@ -495,7 +495,7 @@ Config.BigBanks = {
         }
     },
     ["pacific"] = {
-        ["label"] = "Eclipse Central — Pacific Vault",
+        ["label"] = (AJD_CITY.short .. " Central — Pacific Vault"),
         ["coords"] = {
             [1] = vector3(261.95, 223.11, 106.28),
             [2] = vector3(253.25, 228.44, 101.68)
