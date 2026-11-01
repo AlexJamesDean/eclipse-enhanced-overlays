@@ -1,0 +1,219 @@
+/* Aurora — exact tokens from ajd-hud/html/style.css :root (do not re-derive).
+   Layout mirrors ajd-multicharacter's select scene (letterbox + titlecard +
+   bottom console) so loading -> character select -> spawn reads as one flow. */
+:root {
+    --gold: #c9a962;
+    --gold-light: #e8d5a3;
+    --gold-dark: #8b7355;
+    --gold-muted: rgba(201, 169, 98, 0.3);
+    --surface: #0a0a0a;
+    --surface-elevated: #111111;
+    --surface-card: rgba(22, 22, 22, 0.9);
+    --text-primary: #f0ebe3;
+    --text-secondary: #8a8279;
+    --text-muted: #5a544d;
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    --border-gold: rgba(201, 169, 98, 0.15);
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    background: transparent;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+    width: 100vw;
+    height: 100vh;
+}
+
+.hidden { display: none !important; }
+
+#app { position: absolute; inset: 0; }
+
+/* ---------- letterbox (multicharacter's bars carry straight over) ---------- */
+
+#letterbox-top, #letterbox-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+}
+
+#letterbox-top {
+    top: 0;
+    height: 7vh;
+    border-bottom: 1px solid var(--border-gold);
+}
+
+#letterbox-bottom {
+    bottom: 0;
+    height: 9vh;
+    border-top: 1px solid var(--border-gold);
+}
+
+/* ---------- gold L-corner motif ---------- */
+
+.corner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.corner.tl {
+    top: 0; left: 0;
+    border-top: 1px solid var(--gold);
+    border-left: 1px solid var(--gold);
+}
+
+.corner.br {
+    bottom: 0; right: 0;
+    border-bottom: 1px solid var(--gold);
+    border-right: 1px solid var(--gold);
+}
+
+/* ---------- title card ---------- */
+
+#titlecard {
+    position: absolute;
+    top: 14vh;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    padding: 2.2vh 4vw;
+}
+
+#titlecard-name {
+    font-family: var(--font-display);
+    font-size: 5.4vh;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-indent: 0.35em;
+    color: var(--text-primary);
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.8);
+}
+
+#titlecard-sub {
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 1.5vh;
+    letter-spacing: 0.45em;
+    text-indent: 0.45em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 1vh;
+}
+
+/* ---------- bottom console ---------- */
+
+#console {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2vh;
+    padding-bottom: 1.6vh;
+}
+
+#cards {
+    display: flex;
+    gap: 0.8vw;
+    max-width: 92vw;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    position: relative;
+    background: var(--surface-card);
+    border: 1px solid var(--border-subtle);
+    padding: 1.5vh 1.8vw 1.3vh;
+    min-width: 11vw;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.card:hover { border-color: var(--border-gold); }
+
+.card.selected {
+    border-color: var(--gold-dark);
+    box-shadow: 0 0 18px rgba(201, 169, 98, 0.15);
+}
+
+.card.selected .corner { opacity: 0.8; }
+.card .corner { opacity: 0; transition: opacity 200ms ease; }
+
+.card-label {
+    font-family: var(--font-display);
+    font-size: 2.6vh;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
+.card.selected .card-label { color: var(--gold-light); }
+
+.card-meta {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 1.05vh;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-top: 0.5vh;
+    white-space: nowrap;
+}
+
+/* ---------- confirm ---------- */
+
+.btn {
+    font-family: var(--font-body);
+    font-size: 1.25vh;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    padding: 1.4vh 3.2vw;
+    cursor: pointer;
+    border: 1px solid var(--border-subtle);
+    background: var(--surface-elevated);
+    color: var(--text-secondary);
+    transition: all 200ms ease;
+}
+
+.btn.gold {
+    border-color: var(--border-gold);
+    color: var(--gold);
+}
+
+.btn.gold:not(:disabled):hover {
+    background: rgba(201, 169, 98, 0.12);
+    color: var(--gold-light);
+    box-shadow: 0 0 16px rgba(201, 169, 98, 0.2);
+}
+
+.btn:disabled { opacity: 0.35; cursor: default; }
+
+/* ---------- hints ---------- */
+
+#hints {
+    display: flex;
+    gap: 2.4vw;
+    font-size: 1.15vh;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+#hints b { color: var(--text-secondary); font-weight: 600; }

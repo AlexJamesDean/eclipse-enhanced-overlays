@@ -1,0 +1,196 @@
+.thermite-container {
+    display:none;
+}
+
+.eclipse-lockup {
+    position: absolute;
+    left: 50%;
+    top: calc(20% - 5.25em);
+    transform: translateX(-50%);
+    width: 18em;
+    padding: 0.65em 1em 0.55em;
+    border: 1px solid rgba(241, 196, 15, 0.75);
+    border-left: 4px solid #f1c40f;
+    background: linear-gradient(90deg, rgba(8, 8, 10, 0.96), rgba(20, 18, 8, 0.88));
+    box-shadow: 0 0 24px rgba(241, 196, 15, 0.18);
+    color: #f1c40f;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.22em;
+    text-align: center;
+}
+
+.eclipse-lockup span,
+.eclipse-lockup small {
+    display: block;
+}
+
+.eclipse-lockup span {
+    font-size: 1.05em;
+}
+
+.eclipse-lockup small {
+    margin-top: 0.2em;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.56em;
+    letter-spacing: 0.3em;
+}
+
+#circle {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    width: 15em;
+    height: 15em;
+    border-radius: 50%;
+    margin: 0 0 0 -7.5em;
+    border: 2px solid #f1c40f;
+    background: rgba(5, 5, 7, 0.82);
+    box-shadow: 0 0 40px rgba(241, 196, 15, 0.16), inset 0 0 22px rgba(0, 0, 0, 0.8);
+    z-index: 1;
+    --start: 0deg;
+    --end: 0deg;
+    cursor:pointer;
+    cursor:hand;
+}
+
+.rotate {
+    animation: rotate-anim var(--time) linear;
+}
+
+@keyframes rotate-anim {
+    0% { transform: rotate(var(--start)) }
+    100% { transform: rotate(var(--end)) }
+}
+
+.hidden {
+    transition: none !important;
+    visibility: hidden;
+}
+#retry{
+    text-align: center;
+    margin: 2em auto;
+    line-height: 1em;
+    font-size: 2.5em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
+    color: #f1c40f;
+    text-transform: uppercase;
+    background-color: #222;
+    transition: all 0.5s ease;
+}
+#retry2{
+    transition: all 0.25s ease;
+}
+#retry2 > p{
+    text-align: center;
+    margin: 3.5em auto;
+    line-height: 1em;
+    font-size: 2.5em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
+    color: #f1c40f;
+    text-transform: uppercase;
+    background-color: #222;
+    transition: all 0.25s ease;
+}
+#retry2 > h1{
+    text-align: center;
+    margin: -5.75em auto;
+    line-height: 1em;
+    font-size: 1.5em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
+    color: #fefefe;
+    text-transform: uppercase;
+    background-color: #222;
+}
+#retry2:hover > p{
+    color: #f1c40f;
+    cursor: pointer;
+    cursor: hand;
+}
+#retry:hover{
+    color: #f1c40f;
+    cursor: pointer;
+    cursor: hand;
+}
+#circle2 {
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    width: 15em;
+    height: 15em;
+    border-radius: 50%;
+    margin: 0 0 0 -7.5em;
+    border: 2px solid rgba(241, 196, 15, 0.75);
+    transform: rotate(var(--end));
+}
+
+#pointer {
+    height: 1.5em;
+    width: 12px;
+    background-color: #f1c40f;
+    margin: -0.75em auto;
+    border-radius: 4px;
+    z-index: 999;
+    position: relative;
+}
+
+p {
+    position: absolute;
+    margin-top: -0.2em;
+    top: 20%;
+    left: 50%;
+    line-height: 1em;
+    font-size: 3em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
+    color: #f1c40f;
+    z-index: 10;
+    transform: translate(-50%,60%);
+}
+p > h4{
+    font-size: 0.5em;
+    margin-top: -0.5em;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
+    color: #fefefe;
+}
+
+.point {
+    position: relative;
+    z-index: 10;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background-color: #f1c40f;
+    margin: -1em auto;
+    border: 4px solid #222;
+    box-shadow: 0 0 0 1pt #f1c40f;
+    animation: pulse 1s ease-in-out infinite;
+}
+@keyframes pulse{
+    0% {   box-shadow: 0 0 0 1pt #f1c40f; }
+    50% {  box-shadow: 0 0 0 2.5pt #f1c40f;}
+}
+.time {
+    position: absolute;
+    z-index: -1;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    width: 15em;
+    height: 15em;
+    border-radius: 50%;
+    margin: 0 0 0 -7.5em;
+    background: #f00;
+    transform: scale(0,0);
+}
+.time.done {
+    animation: expand var(--time) linear;
+}
+
+@keyframes expand {
+    0% { transform: scale(0,0) }
+    100% { transform: scale(1,1) }
+}

@@ -1,0 +1,830 @@
+/* qb-banking — Eclipse City "Aurora" reskin (gold & black)
+   Tokens mirror ajd-hud/html/style.css — do not invent colours. */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --gold: #c9a962;
+    --gold-light: #e8d5a3;
+    --gold-dark: #8b7355;
+    --gold-muted: rgba(201, 169, 98, 0.3);
+    --surface: #0a0a0a;
+    --surface-elevated: #111111;
+    --surface-card: rgba(22, 22, 22, 0.9);
+    --text-primary: #f0ebe3;
+    --text-secondary: #8a8279;
+    --text-muted: #5a544d;
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    --border-gold: rgba(201, 169, 98, 0.15);
+    --positive: #8fba8f;
+    --negative: #a06060;
+    --danger: #8b4a4a;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    background: transparent;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Pre-mount guard: pairs with v-cloak on #app in index.html. */
+[v-cloak] {
+    display: none !important;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+/* ── Windows ─────────────────────────────────────────── */
+
+.bank-window,
+.atm-window,
+.pin-window {
+    position: relative;
+    background: var(--surface-card);
+    border: 1px solid var(--border-gold);
+    border-radius: 6px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* hairline gold divider across every panel top */
+.bank-window::before,
+.atm-window::before,
+.pin-window::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-muted), transparent);
+}
+
+.bank-window {
+    width: min(1120px, 80vw);
+    height: min(690px, 82vh);
+}
+
+/* ── Header ──────────────────────────────────────────── */
+
+.window-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--surface-elevated);
+}
+
+.brand-title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 1px;
+    line-height: 1.1;
+}
+
+.brand-sub {
+    margin-top: 3px;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-secondary);
+}
+
+.header-player {
+    text-align: right;
+}
+
+.player-name {
+    font-family: var(--font-display);
+    font-size: 19px;
+    color: var(--text-primary);
+    letter-spacing: 0.5px;
+}
+
+.player-cash {
+    margin-top: 2px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+}
+
+.player-cash span {
+    color: var(--positive);
+    letter-spacing: 1px;
+}
+
+/* ── Body / sidebar ──────────────────────────────────── */
+
+.window-body {
+    flex: 1;
+    display: flex;
+    min-height: 0;
+}
+
+.sidebar {
+    width: 270px;
+    display: flex;
+    flex-direction: column;
+    padding: 18px 16px 16px;
+    border-right: 1px solid var(--border-subtle);
+    background: rgba(10, 10, 10, 0.5);
+}
+
+.section-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    margin: 0 4px 10px;
+}
+
+.account-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 2px;
+}
+
+.account-card {
+    padding: 11px 13px;
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-subtle);
+    border-left: 2px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.account-card:hover {
+    border-color: var(--border-gold);
+}
+
+.account-card.selected {
+    background: rgba(201, 169, 98, 0.08);
+    border-color: var(--border-gold);
+    border-left-color: var(--gold);
+}
+
+.account-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.account-name {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.account-type {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold-dark);
+    border: 1px solid var(--border-gold);
+    border-radius: 3px;
+    padding: 2px 5px;
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.account-balance {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--gold-light);
+    letter-spacing: 0.5px;
+}
+
+.sidebar-bottom {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0 4px;
+}
+
+.foot-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+}
+
+.foot-value {
+    font-size: 11px;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+/* ── Main / tabs ─────────────────────────────────────── */
+
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 0 28px 22px;
+}
+
+.tabs {
+    display: flex;
+    gap: 28px;
+    padding: 16px 0 0;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.tab {
+    padding-bottom: 12px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.15s ease;
+}
+
+.tab:hover {
+    color: var(--text-primary);
+}
+
+.tab.selected {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+}
+
+.view {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    padding-top: 18px;
+    overflow-y: auto;
+}
+
+.view-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+}
+
+.view-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--text-primary);
+    letter-spacing: 0.5px;
+}
+
+.view-sub {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold-dark);
+}
+
+/* ── Transactions table ──────────────────────────────── */
+
+.tx-table {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    background: rgba(10, 10, 10, 0.4);
+}
+
+.tx-row {
+    display: grid;
+    grid-template-columns: 130px 105px 1fr 130px;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 12px;
+}
+
+.tx-row:last-child {
+    border-bottom: none;
+}
+
+.tx-head {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    background: var(--surface-elevated);
+    border-bottom: 1px solid var(--border-gold);
+    flex-shrink: 0;
+}
+
+.tx-scroll {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.tx-date {
+    color: var(--text-secondary);
+    font-size: 11px;
+}
+
+.tx-user {
+    color: var(--text-muted);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tx-reason {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tx-amount {
+    text-align: right;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.positive-balance {
+    color: var(--positive);
+}
+
+.negative-balance {
+    color: var(--negative);
+}
+
+.empty-state {
+    padding: 40px 16px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+/* ── Forms ───────────────────────────────────────────── */
+
+.form-card {
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-card.slim {
+    max-width: 460px;
+}
+
+.card-title {
+    font-family: var(--font-display);
+    font-size: 19px;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+}
+
+.card-sub {
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    margin: 2px 0 10px;
+}
+
+label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    margin: 12px 0 6px;
+}
+
+label .optional {
+    text-transform: none;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+}
+
+input,
+select {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--text-primary);
+    background: var(--surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    padding: 9px 11px;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.15s ease;
+}
+
+input::placeholder {
+    color: var(--text-muted);
+}
+
+input:focus,
+select:focus {
+    border-color: var(--gold-muted);
+}
+
+select option {
+    background: var(--surface-elevated);
+    color: var(--text-primary);
+}
+
+/* hide number spinners */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quick-amounts {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.chip {
+    font-family: var(--font-body);
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--gold);
+    background: transparent;
+    border: 1px solid var(--border-gold);
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.chip:hover {
+    background: var(--gold);
+    color: var(--surface);
+}
+
+/* ── Buttons ─────────────────────────────────────────── */
+
+.btn {
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn.primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--surface);
+}
+
+.btn.primary:hover {
+    background: var(--gold-light);
+}
+
+.btn.ghost {
+    background: transparent;
+    border-color: var(--border-gold);
+    color: var(--gold);
+}
+
+.btn.ghost:hover {
+    background: rgba(201, 169, 98, 0.1);
+}
+
+.btn.danger {
+    background: transparent;
+    border-color: var(--danger);
+    color: var(--negative);
+}
+
+.btn.danger:hover {
+    background: var(--danger);
+    color: var(--text-primary);
+}
+
+.btn.block {
+    width: 100%;
+}
+
+.btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+}
+
+.btn.ghost:disabled:hover {
+    background: transparent;
+}
+
+.btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.btn-row .btn {
+    flex: 1;
+}
+
+/* ── Segmented control (transfer) ────────────────────── */
+
+.segmented {
+    display: flex;
+    border: 1px solid var(--border-gold);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.segment {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-secondary);
+    padding: 7px 14px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.segment.selected {
+    background: var(--gold);
+    color: var(--surface);
+}
+
+/* ── Accounts options grid ───────────────────────────── */
+
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    align-content: start;
+}
+
+.combo-input {
+    position: relative;
+}
+
+.dropdown-container {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-gold);
+    border-radius: 3px;
+    max-height: 140px;
+    overflow-y: auto;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+.dropdown-container ul {
+    list-style: none;
+}
+
+.dropdown-container li {
+    padding: 8px 11px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+.dropdown-container li:hover {
+    background: rgba(201, 169, 98, 0.12);
+    color: var(--gold-light);
+}
+
+/* ── Notifications ───────────────────────────────────── */
+
+.notification-anchor {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 20;
+}
+
+.notification {
+    padding: 10px 16px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-subtle);
+    border-left: 2px solid var(--gold);
+    border-radius: 3px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    animation: notif-in 0.2s ease;
+}
+
+.notification.success {
+    border-left-color: #6b8e6b;
+}
+
+.notification.error {
+    border-left-color: var(--danger);
+}
+
+@keyframes notif-in {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── ATM ─────────────────────────────────────────────── */
+
+.atm-window {
+    width: 380px;
+    padding: 24px 26px 22px;
+    text-align: center;
+}
+
+.atm-header {
+    margin-bottom: 6px;
+}
+
+.atm-body {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.atm-balance,
+.atm-cash {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 2px;
+}
+
+.atm-balance-value {
+    font-family: var(--font-display);
+    font-size: 24px;
+    color: var(--gold-light);
+}
+
+.deposit-all {
+    margin-top: 10px;
+}
+
+.atm-cash {
+    font-size: 12px;
+    color: var(--positive);
+    border-top: 1px solid var(--border-subtle);
+    margin-top: 14px;
+    padding-top: 12px;
+    margin-bottom: 10px;
+}
+
+/* ── PIN pad ─────────────────────────────────────────── */
+
+.pin-window {
+    width: 300px;
+    padding: 26px 28px 24px;
+    text-align: center;
+    align-items: center;
+}
+
+.pin-display {
+    width: 100%;
+    margin: 18px 0 16px;
+    padding: 12px;
+    font-size: 22px;
+    letter-spacing: 8px;
+    text-align: center;
+    color: var(--gold-light);
+    background: var(--surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    min-height: 52px;
+}
+
+.pin-display .pin-placeholder {
+    color: var(--text-muted);
+}
+
+.pin-display.error {
+    border-color: var(--danger);
+    color: var(--negative);
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 26px;
+}
+
+.number-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    width: 100%;
+}
+
+.number-pad button {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--text-primary);
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: 3px;
+    padding: 12px 0;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.number-pad button:hover {
+    border-color: var(--gold-muted);
+    background: rgba(201, 169, 98, 0.08);
+}
+
+.number-pad .pad-alt {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.pin-window .btn-row {
+    width: 100%;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-7px); }
+    40% { transform: translateX(7px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+}
+
+.pin-window.shake {
+    animation: shake 0.35s ease;
+}
+
+/* ── Scrollbars ──────────────────────────────────────── */
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gold-dark);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+}

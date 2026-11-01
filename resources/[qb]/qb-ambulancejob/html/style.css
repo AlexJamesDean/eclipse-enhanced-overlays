@@ -1,0 +1,298 @@
+/* Aurora — exact tokens from ajd-hud/html/style.css :root. */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@200;300;400;500;600&display=swap');
+
+:root {
+    --gold: #c9a962;
+    --gold-light: #e8d5a3;
+    --gold-dark: #8b7355;
+    --gold-muted: rgba(201, 169, 98, 0.3);
+    --surface: #0a0a0a;
+    --surface-card: rgba(22, 22, 22, 0.9);
+    --text-primary: #f0ebe3;
+    --text-secondary: #8a8279;
+    --text-muted: #5a544d;
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    --border-gold: rgba(201, 169, 98, 0.15);
+    --rose: #c98a8a;
+    --rose-dark: #8b4a4a;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    user-select: none;
+    pointer-events: none;
+}
+
+.hidden { display: none !important; }
+
+#death-ui {
+    position: fixed;
+    inset: 0;
+    opacity: 1;
+    transition: opacity 500ms ease;
+}
+
+#death-ui.entering .medical-panel { animation: panel-reveal 700ms cubic-bezier(.22, 1, .36, 1) both; }
+#death-ui.phase-change .medical-panel { animation: phase-shift 620ms cubic-bezier(.22, 1, .36, 1); }
+#death-ui.flatline-hit .vignette { animation: flatline-flash 850ms ease-out; }
+
+/* Reuses ajd-drugs' veil model: a real colour wash + edge haze, never a black
+   panel. The full-death monochrome is applied by the game timecycle in Lua. */
+#medical-veil {
+    position: absolute;
+    inset: 0;
+    opacity: 1;
+    transition: opacity 900ms ease-in-out;
+    --med-r: 142;
+    --med-g: 23;
+    --med-b: 34;
+    --med-tint: .10;
+    --med-haze: .42;
+    --med-bright: 0;
+    --med-pulse: 3.8s;
+}
+
+#death-ui.dead #medical-veil { opacity: 0; }
+.medical-veil-layer { position: absolute; inset: 0; }
+#medical-tint {
+    background: rgb(var(--med-r) var(--med-g) var(--med-b) / var(--med-tint));
+    animation: medical-breathe var(--med-pulse) ease-in-out infinite;
+}
+#medical-haze {
+    background: radial-gradient(
+        ellipse 76% 74% at 50% 48%,
+        rgb(var(--med-r) var(--med-g) var(--med-b) / 0) 35%,
+        rgb(var(--med-r) var(--med-g) var(--med-b) / calc(var(--med-haze) * .42)) 70%,
+        rgb(var(--med-r) var(--med-g) var(--med-b) / var(--med-haze)) 100%
+    );
+    animation: medical-drift calc(var(--med-pulse) * 2.2) ease-in-out infinite;
+}
+#medical-bright {
+    background: rgb(255 245 240 / var(--med-bright));
+    animation: medical-breathe calc(var(--med-pulse) * .82) ease-in-out infinite;
+}
+
+.vignette {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at center, transparent 48%, rgba(8, 3, 3, .12) 80%, rgba(5, 2, 2, .30) 100%),
+        linear-gradient(to bottom, rgba(8, 2, 2, .03), transparent 48%, rgba(8, 2, 2, .12));
+    transition: background 900ms ease;
+}
+
+#death-ui.dead .vignette {
+    background:
+        radial-gradient(ellipse at center, transparent 24%, rgba(0, 0, 0, .30) 72%, rgba(0, 0, 0, .84) 100%),
+        linear-gradient(to bottom, rgba(0, 0, 0, .16), transparent 42%, rgba(0, 0, 0, .40));
+}
+
+.vital-aura {
+    position: absolute;
+    left: 50%;
+    bottom: 14vh;
+    width: 34vw;
+    aspect-ratio: 1;
+    transform: translate(-50%, 50%);
+    opacity: .17;
+    transition: opacity 800ms ease, filter 800ms ease;
+}
+
+.vital-aura i {
+    position: absolute;
+    inset: 25%;
+    border: 1px solid rgba(201, 169, 98, .32);
+    border-radius: 50%;
+    animation: aura-ring 4.2s ease-out infinite;
+    will-change: transform, opacity;
+}
+.vital-aura i:nth-child(2) { animation-delay: 1.4s; }
+.vital-aura i:nth-child(3) { animation-delay: 2.8s; }
+#death-ui.dead .vital-aura { opacity: .08; filter: sepia(1) saturate(.35) hue-rotate(310deg); }
+#death-ui.dead .vital-aura i { animation: aura-die 2.4s ease-out forwards; border-color: rgba(201, 138, 138, .3); }
+
+.medical-panel {
+    position: absolute;
+    left: 50%;
+    bottom: 4.5vh;
+    width: min(760px, 76vw);
+    transform: translateX(-50%);
+    padding: 18px 22px 20px;
+    background: linear-gradient(150deg, rgba(22, 22, 22, .94), rgba(7, 7, 7, .92));
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 22px 65px rgba(0, 0, 0, .58), inset 0 1px rgba(255, 255, 255, .025);
+    /* Do not use backdrop-filter here. FiveM CEF can promote a filtered,
+       animated transparent NUI layer into an oversized opaque black surface. */
+    isolation: isolate;
+    overflow: hidden;
+}
+
+.medical-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(105deg, transparent 18%, rgba(232, 213, 163, .035) 43%, rgba(232, 213, 163, .08) 50%, rgba(232, 213, 163, .035) 57%, transparent 82%);
+    transform: translateX(-115%);
+    animation: panel-shimmer 7s ease-in-out infinite;
+}
+
+.medical-panel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -24%;
+    width: 24%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    opacity: .6;
+    animation: edge-scan 4.8s ease-in-out infinite;
+    will-change: transform, opacity;
+}
+
+.corner { position: absolute; width: 18px; height: 18px; opacity: .65; }
+.corner.tl { top: -1px; left: -1px; border-top: 1px solid var(--gold); border-left: 1px solid var(--gold); }
+.corner.br { right: -1px; bottom: -1px; border-right: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
+#death-ui.dead .corner { border-color: var(--rose-dark); }
+
+.eyebrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gold);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: .32em;
+}
+
+.telemetry { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); letter-spacing: .2em; }
+.pulse-dot { position: relative; display: inline-block; flex: 0 0 auto; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold); animation: pulse 1.5s ease-in-out infinite; }
+.pulse-dot::before, .pulse-dot::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    margin: 0;
+    border: 1px solid rgba(201, 169, 98, .7);
+    border-radius: 50%;
+    animation: signal-ring 1.5s ease-out infinite;
+}
+.pulse-dot::after { animation-delay: .22s; }
+#death-ui.dead .pulse-dot { background: var(--rose-dark); box-shadow: none; animation: none; }
+#death-ui.dead .pulse-dot::before, #death-ui.dead .pulse-dot::after { display: none; }
+
+.rule { height: 1px; margin: 12px 0 15px; background: linear-gradient(90deg, transparent, var(--border-gold) 12%, var(--border-gold) 88%, transparent); }
+.rule span { display: block; width: 19%; height: 1px; margin: auto; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+
+.condition-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; }
+.condition-copy { min-width: 0; }
+#phase-kicker { color: var(--rose); font-size: 9px; font-weight: 500; letter-spacing: .3em; margin-bottom: 4px; }
+#phase-title { font-family: var(--font-display); font-size: 30px; font-weight: 500; letter-spacing: .02em; line-height: 1; }
+#phase-detail { color: var(--text-secondary); font-size: 10px; font-weight: 300; letter-spacing: .04em; margin-top: 7px; }
+
+.timer { flex: 0 0 auto; text-align: right; }
+.timer span { display: block; color: var(--text-muted); font-size: 8px; letter-spacing: .28em; margin-bottom: 2px; }
+.timer strong { color: var(--gold-light); font-family: var(--font-display); font-size: 34px; font-weight: 400; letter-spacing: .08em; line-height: .9; font-variant-numeric: tabular-nums; }
+.timer.tick strong { animation: timer-tick 340ms cubic-bezier(.22, 1, .36, 1); }
+#death-ui.dead .timer strong { color: var(--rose); }
+
+.life-line { display: flex; align-items: center; gap: 9px; height: 18px; margin: 6px 0 5px; overflow: hidden; }
+.life-line span { height: 1px; flex: 1; background: linear-gradient(90deg, transparent, rgba(201, 169, 98, .22)); }
+.life-line span:last-child { background: linear-gradient(90deg, rgba(201, 169, 98, .22), transparent); }
+.life-line i { position: relative; width: 44px; height: 12px; overflow: hidden; background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 88 24'%3E%3Cpath fill='none' stroke='%23c9a962' stroke-width='1.5' d='M0 12h27l5-8 7 17 7-16 6 7h36'/%3E%3C/svg%3E"); animation: heartbeat 1.5s ease-in-out infinite; }
+.life-line i b { position: absolute; inset: 0 auto 0 -35%; width: 35%; background: linear-gradient(90deg, transparent, rgba(232,213,163,.75), transparent); filter: blur(2px); animation: ecg-sweep 1.5s linear infinite; }
+#death-ui.dead .life-line i { opacity: .35; animation: none; background-image: linear-gradient(var(--rose-dark), var(--rose-dark)); background-size: 100% 1px; }
+#death-ui.dead .life-line i b { display: none; }
+
+.actions { display: grid; gap: 7px; }
+.action-card {
+    min-height: 54px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 13px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .018);
+    border: 1px solid var(--border-subtle);
+    border-left-color: var(--gold-dark);
+    transition: border-color 250ms ease, background 250ms ease, opacity 250ms ease;
+}
+.action-card.primary { background: linear-gradient(90deg, rgba(201, 169, 98, .075), rgba(255, 255, 255, .012)); border-color: var(--border-gold); border-left: 2px solid var(--gold); }
+.action-card.primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, transparent 25%, rgba(232, 213, 163, .045) 50%, transparent 75%);
+    transform: translateX(-105%);
+    animation: action-sweep 4.4s ease-in-out infinite;
+}
+.action-card.compact { min-height: 46px; }
+.action-card.locked { opacity: .58; border-left-color: var(--text-muted); }
+.action-card.active { border-left-color: var(--gold-light); box-shadow: inset 30px 0 55px rgba(201, 169, 98, .04); }
+.action-card.active kbd { animation: key-ready 1.25s ease-in-out infinite; }
+.action-card.responding .status::after { content: '···'; display: inline-block; width: 0; overflow: hidden; vertical-align: bottom; margin-left: 4px; animation: dispatch-dots 1.2s steps(3, end) infinite; }
+.action-card.stage-change { animation: state-shift 520ms cubic-bezier(.22, 1, .36, 1); }
+
+kbd {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 30px;
+    color: var(--surface);
+    background: var(--gold-light);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 2px;
+    box-shadow: 0 2px 0 var(--gold-dark), 0 0 14px rgba(201, 169, 98, .15);
+    font: 600 11px var(--font-body);
+}
+.locked kbd { color: var(--text-secondary); background: #24221f; border-color: rgba(255,255,255,.06); box-shadow: 0 2px 0 #111; }
+.action-card strong { display: block; color: var(--text-primary); font-size: 10px; font-weight: 500; letter-spacing: .15em; }
+.action-card small { display: block; color: var(--text-secondary); font-size: 9px; font-weight: 300; letter-spacing: .03em; margin-top: 3px; }
+.status { color: var(--gold); font-size: 8px; font-weight: 500; letter-spacing: .22em; }
+.locked .status { color: var(--text-muted); }
+
+.hold-progress { position: absolute; left: 0; bottom: 0; width: var(--hold, 0%); height: 2px; background: var(--gold); box-shadow: 0 0 12px rgba(201, 169, 98, .4); transition: width 180ms linear; }
+
+@keyframes panel-reveal {
+    from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+@keyframes pulse { 0%, 100% { opacity: .4; transform: scale(.8); } 50% { opacity: 1; transform: scale(1); } }
+@keyframes heartbeat { 0%, 35%, 100% { opacity: .4; } 12%, 20% { opacity: 1; } }
+@keyframes aura-ring { 0% { transform: scale(.25); opacity: 0; } 12% { opacity: .75; } 70%, 100% { transform: scale(1.9); opacity: 0; } }
+@keyframes aura-die { from { transform: scale(1); opacity: .55; } to { transform: scale(2); opacity: 0; } }
+@keyframes panel-shimmer { 0%, 68% { transform: translateX(-115%); } 90%, 100% { transform: translateX(115%); } }
+@keyframes edge-scan { 0%, 15% { transform: translateX(0); opacity: 0; } 30% { opacity: .7; } 72%, 100% { transform: translateX(520%); opacity: 0; } }
+@keyframes signal-ring { from { opacity: .7; transform: scale(.6); } to { opacity: 0; transform: scale(3); } }
+@keyframes ecg-sweep { from { left: -35%; } to { left: 100%; } }
+@keyframes action-sweep { 0%, 62% { transform: translateX(-105%); } 84%, 100% { transform: translateX(105%); } }
+@keyframes timer-tick { 0% { opacity: .25; transform: translateY(-5px) scale(.98); filter: blur(2px); } 100% { opacity: 1; transform: none; filter: none; } }
+@keyframes key-ready { 0%, 100% { box-shadow: 0 2px 0 var(--gold-dark), 0 0 8px rgba(201,169,98,.1); } 50% { box-shadow: 0 2px 0 var(--gold-dark), 0 0 20px rgba(201,169,98,.35); } }
+@keyframes dispatch-dots { from { width: 0; } to { width: 12px; } }
+@keyframes state-shift { 0% { background-color: rgba(201,169,98,.16); } 100% { background-color: transparent; } }
+@keyframes phase-shift { 0% { transform: translateX(-50%) scale(1); } 18% { transform: translateX(-50%) scale(1.012); filter: brightness(1.35); } 100% { transform: translateX(-50%) scale(1); filter: none; } }
+@keyframes flatline-flash { 0% { opacity: 1; background-color: rgba(180,35,35,.22); } 32% { opacity: .68; } 100% { opacity: 1; background-color: transparent; } }
+@keyframes medical-breathe { 0%, 100% { opacity: .72; } 50% { opacity: 1; } }
+@keyframes medical-drift { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.055); } }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; }
+}
+
+@media (max-width: 900px), (max-height: 650px) {
+    .medical-panel { bottom: 2.5vh; width: min(720px, 88vw); padding: 14px 18px 16px; }
+    #phase-title { font-size: 26px; }
+    .timer strong { font-size: 30px; }
+    .action-card { min-height: 48px; }
+}

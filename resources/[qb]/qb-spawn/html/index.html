@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- Aurora reskin (30 Jul 2026). Presentation only: speaks the exact stock NUI
+     protocol (showUi / setupLocations / setupAppartements in; setCam /
+     spawnplayer / chooseAppa out) so client.lua's spawn logic is untouched.
+     No CDN dependencies - fonts self-hosted (same files as ajd-loading).
+     vue.js / reset.css on disk are the SUPERSEDED stock UI, no longer loaded. -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app" class="hidden">
+
+        <div id="letterbox-top"></div>
+        <div id="letterbox-bottom"></div>
+
+        <div id="titlecard">
+            <div class="corner tl"></div>
+            <div class="corner br"></div>
+            <div id="titlecard-name">ECLIPSE CITY</div>
+            <div id="titlecard-sub">Where would you like to start?</div>
+        </div>
+
+        <div id="console">
+            <div id="cards"></div>
+            <button type="button" id="confirm" class="btn gold" disabled>Confirm</button>
+            <div id="hints">
+                <span><b>&#9664;&nbsp;&#9654;</b> Browse</span>
+                <span><b>Enter</b> <span id="hint-confirm">Confirm</span></span>
+            </div>
+        </div>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

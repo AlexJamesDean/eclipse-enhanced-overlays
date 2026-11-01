@@ -1,0 +1,71 @@
+/* Aurora Theme - Target Labels */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@200;300;400;500;600&display=swap');
+
+:root {
+    --gold: #c9a962;
+    --gold-light: #e8d5a3;
+    --gold-dark: #8b7355;
+    --gold-muted: rgba(201, 169, 98, 0.3);
+    --surface: #0a0a0a;
+    --surface-card: rgba(22, 22, 22, 0.95);
+    --surface-hover: rgba(28, 28, 28, 0.95);
+    --text-primary: #f0ebe3;
+    --text-secondary: #8a8279;
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    --border-gold: rgba(201, 169, 98, 0.15);
+    --success: #6b8e6b;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+body { overflow: hidden; font-family: var(--font-body); }
+
+#target-eye {
+    position: absolute; top: 50%; left: 50%; display: none;
+    transform: translateY(-50%) translateX(-50%);
+    font-size: 2vh; color: var(--gold);
+    transition: color 0.3s ease;
+}
+
+#target-label-wrapper {
+    position: absolute; display: flex;
+    align-content: center; justify-content: center;
+    flex-direction: row; left: 51.5%;
+    width: fit-content; height: 100%; top: 49.25%;
+}
+
+#target-label {
+    list-style: none;
+    font-size: 1vh; font-weight: 500;
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    user-select: none; white-space: nowrap;
+    text-transform: uppercase; letter-spacing: 1px;
+}
+
+[id^="target-option-"] {
+    margin-bottom: 0.2vh; padding: 0.5rem 0.8rem;
+    background: var(--surface-card);
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
+    transition: all 0.3s ease;
+    text-transform: uppercase; letter-spacing: 1px;
+    font-size: 11px;
+}
+
+[id^="target-option-"]:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-gold);
+    color: var(--gold);
+    transform: translateX(6px);
+}
+
+[id^="target-option-"]:hover::before {
+    content: '';
+    position: absolute; left: 0; top: 0;
+    height: 100%; width: 2px;
+    background: var(--gold);
+    opacity: 0.5;
+}
+
+.target-success { color: var(--gold) !important; }

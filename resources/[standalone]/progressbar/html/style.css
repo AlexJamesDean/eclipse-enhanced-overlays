@@ -1,0 +1,88 @@
+/* Aurora theme — shared gold & black UI system (matches ajd-hud / ajd-phone / ajd-housing). */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap");
+
+:root {
+    --gold: #c9a962;
+    --gold-light: #e8d5a3;
+    --gold-dark: #8b7355;
+    --gold-muted: rgba(201, 169, 98, 0.3);
+    --border-gold: rgba(201, 169, 98, 0.15);
+    --text-primary: #f0ebe3;
+    --text-secondary: #8a8279;
+}
+
+html {
+    overflow: hidden;
+    font-family: "Montserrat", sans-serif;
+}
+
+body {
+    background: transparent !important;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.progress-container {
+    display: none;
+    z-index: 5;
+    color: var(--text-primary);
+    width: 15%;
+    position: fixed;
+    bottom: 15%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "Montserrat", sans-serif;
+}
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6vh;
+}
+
+#progress-label {
+    font-size: 1.15vh;
+    line-height: 2vh;
+    position: relative;
+    color: var(--text-primary);
+    z-index: 10;
+    font-weight: 400;
+    letter-spacing: 0.28vh;
+    text-transform: uppercase;
+}
+
+#progress-percentage {
+    font-size: 1.15vh;
+    line-height: 2vh;
+    position: relative;
+    color: var(--gold-light);
+    z-index: 10;
+    font-weight: 500;
+    letter-spacing: 0.1vh;
+}
+
+.progress-bar-container {
+    background: rgba(10, 10, 10, 0.72);
+    height: 0.5vh;
+    position: relative;
+    display: block;
+    border-radius: 1px;
+    border: 1px solid var(--border-gold);
+    overflow: hidden;
+}
+
+#progress-bar {
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold) 55%, var(--gold-light));
+    width: 0%;
+    height: 100%;
+    border-radius: 1px;
+    transition: width 0.3s;
+    transition-timing-function: ease-out;
+    box-shadow: 0 0 8px rgba(201, 169, 98, 0.55);
+}

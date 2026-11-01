@@ -1,0 +1,62 @@
+/* Aurora Theme - Radial Menu */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@200;300;400;500;600&display=swap');
+
+:root {
+    --gold: #c9a962;
+    --gold-light: #e8d5a3;
+    --gold-dark: #8b7355;
+    --surface: #0a0a0a;
+    --text-primary: #f0ebe3;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Montserrat', sans-serif;
+    --menu-sector-font-size: 2.8px;
+    --menu-center-font-size: 2.5px;
+}
+
+h1 { font-weight: 400; color: var(--text-primary); font-family: var(--font-display); }
+div.info { margin: 8px 0; }
+div.info * { font-size: 14px; color: var(--text-primary); font-family: var(--font-body); }
+
+#icons { display: none; }
+
+.container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+#vehicle { fill: var(--text-primary); }
+
+div.menuHolder { user-select: none; -moz-user-select: none; position: absolute; left: 0; right: 0; margin-left: auto; margin-right: auto; top: 30%; }
+
+svg.icons { display: none; }
+
+svg.menu { position: absolute; overflow: visible; transition: 0.1s; transition-timing-function: ease-out; }
+svg.menu.inner { transform: scale(0.66) rotate(-10deg); opacity: 0; visibility: hidden; }
+svg.menu.outer { opacity: 0; visibility: hidden; }
+
+svg.menu > g > path { fill: rgba(22, 22, 22, 0.92); }
+
+svg.menu > g.sector > path { cursor: pointer; }
+
+svg.menu > g.sector > text,
+svg.menu > g.sector > use {
+    font-family: var(--font-body);
+    margin-top: 5px;
+    font-size: var(--menu-sector-font-size);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    fill: var(--text-primary);
+}
+
+svg.menu > g.sector:hover > path { fill: rgba(28, 28, 28, 0.95); stroke: var(--gold); }
+
+svg.menu > g.center:hover > circle { fill: rgba(28, 28, 28, 0.95); stroke: var(--gold); }
+
+svg.menu > g.center > circle { cursor: pointer; fill: rgba(22, 22, 22, 0.92); }
+
+svg.menu > g.center > text,
+svg.menu > g.center > use {
+    margin-top: 5px;
+    font-size: var(--menu-center-font-size);
+    cursor: pointer;
+    fill: var(--text-primary);
+    font-family: var(--font-body);
+}

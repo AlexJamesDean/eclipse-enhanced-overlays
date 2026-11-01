@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eclipse Medical</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main id="death-ui" class="hidden" aria-live="polite">
+        <div id="medical-veil" aria-hidden="true">
+            <div class="medical-veil-layer" id="medical-tint"></div>
+            <div class="medical-veil-layer" id="medical-haze"></div>
+            <div class="medical-veil-layer" id="medical-bright"></div>
+        </div>
+        <div class="vignette"></div>
+        <div class="vital-aura" aria-hidden="true">
+            <i></i><i></i><i></i>
+        </div>
+
+        <section class="medical-panel">
+            <i class="corner tl"></i>
+            <i class="corner br"></i>
+
+            <header class="eyebrow">
+                <span>ECLIPSE MEDICAL</span>
+                <span class="telemetry"><b class="pulse-dot"></b><span id="telemetry-label">TRAUMA RESPONSE</span></span>
+            </header>
+
+            <div class="rule"><span></span></div>
+
+            <div class="condition-row">
+                <div class="condition-copy">
+                    <p id="phase-kicker">CRITICAL CONDITION</p>
+                    <h1 id="phase-title">Stay conscious.</h1>
+                    <p id="phase-detail">Your condition is deteriorating. Help can still reach you.</p>
+                </div>
+                <div class="timer" aria-label="time remaining">
+                    <span id="timer-label">BLEEDOUT</span>
+                    <strong id="timer-value">06:00</strong>
+                </div>
+            </div>
+
+            <div class="life-line" aria-hidden="true">
+                <span></span><i><b></b></i><span></span>
+            </div>
+
+            <div id="laststand-actions" class="actions">
+                <div id="aidoc-action" class="action-card primary">
+                    <kbd id="aidoc-key">H</kbd>
+                    <div>
+                        <strong id="aidoc-title">REQUEST PRIVATE PARAMEDIC</strong>
+                        <small id="aidoc-detail">Available now · call-out fee applies</small>
+                    </div>
+                    <span id="aidoc-status" class="status">READY</span>
+                </div>
+
+                <div id="ems-action" class="action-card compact locked">
+                    <kbd>G</kbd>
+                    <div>
+                        <strong>ALERT CITY EMS</strong>
+                        <small id="ems-detail">Emergency dispatch is monitoring your condition</small>
+                    </div>
+                    <span id="ems-status" class="status">STANDBY</span>
+                </div>
+            </div>
+
+            <div id="dead-action" class="actions hidden">
+                <div id="respawn-action" class="action-card primary locked">
+                    <kbd>E</kbd>
+                    <div>
+                        <strong id="respawn-title">HOSPITAL TRANSFER LOCKED</strong>
+                        <small id="respawn-detail">Private aid is no longer available</small>
+                    </div>
+                    <span id="respawn-status" class="status">WAIT</span>
+                    <i id="hold-progress" class="hold-progress"></i>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
